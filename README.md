@@ -15,3 +15,8 @@ It's simple.
 - She then, will be required to input this code into the app.
 - When she inputs the code, then she will reveal a part of the map and a new riddle.
 - The last code will reveal the X in the map, where her gift will be waiting
+
+## Some tech stuff
+- Some validations that I do includes if the code was already used or if it's correct.
+- I don't focused on the order, since she can end up finding one code while search for other one.
+- This is also a showroom of a frameworkless project. Why using any kind of framework to do something this simple?
