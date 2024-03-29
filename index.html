@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter Hunt!</title>
+</head>
+
+<body>
+    <div>
+        <img style="opacity: 0;" src="./assets/dicas/dica_1.jpg">
+
+        <div>
+            <div id="riddle"></div>
+            <input id="inputCode" oninput="removeError()" placeholder="Digite o código aqui" />
+            <button onclick="submitCode()">Verificar Código</button>
+            <div id="wrongCode" class="_dn">O código está errado, tente novamente!</div>
+        </div>
+    </div>
+
+    <script>
+        let currentAnswer = 0;
+        const codes = ["Egg426Bunny", "Choco577Hop", "Bunny2024Egg", "Jelly782Beans", "Hop135Candy", "Carrot495Patch", "Chick852Spring", "Joy7410Easter", "Basket963Egg", "Peep791Candy"]
+        const usedCodes = [];
+        const riddles = [
+            "Por mim você entra e sai.&Abro e fecho muitas vezes, quem sou eu?",
+            "Tenho boca mas não dente.&Não tenho chama, mas sou quente ",
+            "De dia perco a cabeça.&De noite eu pego ela de volta ",
+            "Me sinto bem quando cheia, toda hora abro e fecho e todos gostam de mim ",
+            "Muitos me encaram por um longo tempo, mas vampiros não gostam de mim ",
+            "Sempre em movimento, mas nunca saio do lugar.&Sou útil para limpar, mas não sou uma vassoura.",
+            "Olho para o céu ou para a rua, de dia me abro e de noite me fecho. ",
+            "Estou de baixo do móvel no coração da casa.&Onde se corta, se prepara, e se compartilha ",
+            "Com ranhuras e agulha faço som. ",
+            "Meu caminho é vertical, mas não sou um prédio",
+        ]
+
+        function delay(miliseconds) {
+            return new Promise(resolve => setTimeout(resolve, miliseconds));
+        }
+
+        function removeError() {
+            const errorMessage = document.querySelector('#wrongCode');
+            errorMessage.classList.remove('_db');
+        }
+
+        function showError(errorMessage) {
+            const errorDiv = document.querySelector('#wrongCode');
+            errorDiv.innerText = errorMessage;
+            errorDiv.classList.add('_db');
+        }
+
+        async function changeRiddle() {
+            const riddlePlace = document.querySelector('#riddle');
+            const currentRiddle = riddlePlace.innerHTML;
+
+            for (let i = currentRiddle.length; i >= 0; i--) {
+                riddlePlace.innerHTML = currentRiddle.slice(0, i);
+                await delay(30);
+            }
+
+            for (let i = 0; i <= riddles[currentAnswer].length - 1; i++) {
+                const newLetter = riddles[currentAnswer][i]
+                riddlePlace.innerHTML += newLetter === '&' ? '</br>' : newLetter;
+                await delay(50);
+            }
+        }
+
+        function submitCode() {
+            const inputCode = document.querySelector('#inputCode');
+            const codeInputed = inputCode.value;
+
+            const usedCode = usedCodes.some(code => code === codeInputed);
+            if (usedCode) {
+                showError("Esse código já foi usado!")
+                return
+            }
+
+            const indexCodeUsed = codes.findIndex(code => code === codeInputed)
+            if (indexCodeUsed >= 0) {
+                updateMap()
+                codes.splice(indexCodeUsed, 1);
+                usedCodes.push(codeInputed);
+                inputCode.value = '';
+                changeRiddle();
+            } else {
+                showError("O código está errado, tente novamente!")
+            }
+        }
+
+        async function updateMap() {
+            if (currentAnswer === 10) return;
+
+            currentAnswer++;
+            const image = document.querySelector('img');
+
+            image.src = `./assets/dicas/dica_${currentAnswer}.jpg`
+            image.style = null;
+            await delay(500);
+
+            if (currentAnswer === 1) image.style = 'opacity: 0';
+            else image.src = `./assets/dicas/dica_${currentAnswer - 1}.jpg`
+            await delay(500);
+
+            image.src = `./assets/dicas/dica_${currentAnswer}.jpg`
+            image.style = null;
+            await delay(500);
+
+            if (currentAnswer === 1) image.style = 'opacity: 0';
+            else image.src = `./assets/dicas/dica_${currentAnswer - 1}.jpg`
+            await delay(500);
+
+            image.src = `./assets/dicas/dica_${currentAnswer}.jpg`
+            image.style = null;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            changeRiddle();
+        });
+    </script>
+
+    <style>
+        img {
+            width: 100%;
+            box-shadow: 0 8px 12px -4px rgba(0, 0, 0, 0.5);
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 8px 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 32px 8px;
+        }
+
+        #riddle {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 12px 0;
+        }
+
+        #wrongCode {
+            color: red;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        ._dn {
+            display: none;
+        }
+
+        ._db {
+            display: block;
+        }
+    </style>
+</body>
+
+</html>
