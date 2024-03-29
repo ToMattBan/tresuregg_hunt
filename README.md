@@ -24,4 +24,5 @@ It's simple.
 
 ## Showrooming
 - Look how it works!
-![Demo Tressuregg hunt](./assets/showroom/showroom.gif)
+
+https://github.com/ToMattBan/tresuregg_hunt/assets/50156748/460fb895-1b7c-43d5-b4e6-9c2b9fddc11b
