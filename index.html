@@ -81,7 +81,7 @@
             const indexCodeUsed = codes.findIndex(code => code === codeInputed)
             if (indexCodeUsed >= 0) {
                 currentAnswer++;
-                updateMap()
+                updateMap();
                 changeRiddle();
                 codes.splice(indexCodeUsed, 1);
                 usedCodes.push(codeInputed);
@@ -92,7 +92,7 @@
         }
 
         async function updateMap() {
-            if (currentAnswer >= 10) return;
+            if (currentAnswer > 10) return;
 
             const image = document.querySelector('img');
 
