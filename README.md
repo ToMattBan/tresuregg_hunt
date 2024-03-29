@@ -17,6 +17,7 @@ It's simple.
 - The last code will reveal the X in the map, where her gift will be waiting
 
 ## Some tech stuff
+- I didn't look at how it works on desktops. It is intended to work just on mobile devices
 - Some validations that I do includes if the code was already used or if it's correct.
 - I don't focused on the order, since she can end up finding one code while search for other one.
 - This is also a showroom of a frameworkless project. Why using any kind of framework to do something this simple?
