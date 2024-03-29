@@ -21,3 +21,7 @@ It's simple.
 - Some validations that I do includes if the code was already used or if it's correct.
 - I don't focused on the order, since she can end up finding one code while search for other one.
 - This is also a showroom of a frameworkless project. Why using any kind of framework to do something this simple?
+
+## Showrooming
+- Look how it works!
+![Demo Tressuregg hunt](./assets/showroom/showroom.gif)
