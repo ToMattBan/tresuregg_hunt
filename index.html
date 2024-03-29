@@ -34,6 +34,7 @@
             "Estou de baixo do móvel no coração da casa.&Onde se corta, se prepara, e se compartilha ",
             "Com ranhuras e agulha faço som. ",
             "Meu caminho é vertical, mas não sou um prédio",
+            "PARABÉNS! Agora vá até o X no mapa e veja o que você consegue achar!"
         ]
 
         function delay(miliseconds) {
@@ -79,20 +80,20 @@
 
             const indexCodeUsed = codes.findIndex(code => code === codeInputed)
             if (indexCodeUsed >= 0) {
+                currentAnswer++;
                 updateMap()
+                changeRiddle();
                 codes.splice(indexCodeUsed, 1);
                 usedCodes.push(codeInputed);
                 inputCode.value = '';
-                changeRiddle();
             } else {
                 showError("O código está errado, tente novamente!")
             }
         }
 
         async function updateMap() {
-            if (currentAnswer === 10) return;
+            if (currentAnswer >= 10) return;
 
-            currentAnswer++;
             const image = document.querySelector('img');
 
             image.src = `./assets/dicas/dica_${currentAnswer}.jpg`
